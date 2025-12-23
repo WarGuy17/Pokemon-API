@@ -35,14 +35,26 @@ main {
     padding: 5px;
 }
 
-#pokemon_picture {
-    width: 454px;
-    height: 350px;
+#display {
+    height: 300px;
+    width: 300px;
     margin-top: 30px;
-    background-image: url(https://i.imgflip.com/7ywgwp.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 454px 350px;
     border: 2px solid black;
+    display: flex;
+}
+
+#pokemon_picture {
+    height: 25%;
+    width: 50%;
+    align-items: center;
+    justify-items: center;
+}
+
+#pokemon_picture img {
+    display: flex;
+}
+
+#pokemon_data {
+    height: 300px;
+    width: 50%;
 }

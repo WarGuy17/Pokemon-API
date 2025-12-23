@@ -1,12 +1,18 @@
-let header = document.querySelectorAll('.header');
-let main = document.querySelectorAll('#main');
-let paragraph = document.querySelectorAll('#paragraph');
-let form = document. querySelectorAll('#form');
-let input = document.querySelectorAll('.input');
-let button = document.querySelectorAll('.button');
-let pokemonPicture = document.querySelectorAll('#pokemon_picture');
-let pokemonData = document.querySelectorAll('#pokemon_data');
+let input = document.querySelector('.input');
+let button = document.querySelector('.button');
+let display = document.querySelector('#display');
+let pokemonPicture = document.querySelector('#pokemon_picture');
+let pokemonData = document.querySelector('#pokemon_data');
 
-input.addEventListener(input, function( {
-    console.log('hello'));
-})
+async function getPokemon(){
+    let url = 'https://pokeapi.co/api/v2/pokemon/';
+    let res = await fetch(url);
+    let pokemon = await res.json(url);
+
+    let pokemonName = pokemon['name'];
+    let pokemonImage = pokemon['sprites']['front_default'];
+};
+
+button.addEventListener("click", () => {
+    
+});
