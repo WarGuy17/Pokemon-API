@@ -17,16 +17,18 @@
             <p>Type below the pokemon you want to see the stats for! Hit the submit button to generate the pokemon below</p>
         </section>
         <section id = "form">
-            <form>
                 <input class = "input" type = "text" placeholder = "Choose your Pokemon">
-                <button class = "button" >Submit</button>
-            </form>
+                <div class="button"><p>Fetch Pokemon</p></div>
+                <div class="button2"><p>Random Pokemon</p></div>
         </section>
         <section id = "display">
-            <div id = pokemon_picture>
-                <img src="">
-            </div> 
-            <div id = pokemon_data></div>
+            <img id = "pokemonPicture" src="">
+            <div id = "pokemon_data">
+                <div id = pokemon_name></div>
+                <div id = pokemon_type></div>
+                <div id = pokemon_hp></div>
+                <div id = pokemon_attack></div>
+                <div id = pokemon_defense></div>
             </div>
         </section>
     </main>
