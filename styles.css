@@ -72,9 +72,14 @@ main {
 
 #pokemon_data {
     height: 150px;
-    width: auto;
+    width: 150px;
     text-align: center;
     font-size: 0.75rem;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    margin-bottom: 10px;
 }
 
 
