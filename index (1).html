@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon API Explorer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+    <link href="./styles.css" rel="stylesheet">
+</head>
+<body>
+
+    <!--This is the header-->
+    <header class = "header">
+        <img src="./media/pokemon-logo-pokemon-icon-transparent-free-png.webp"></img>
+        <h1>Pokemon API Project</h1>
+    </header>
+
+    <!--This is the Main section-->
+    <main id = 'main'>
+        <!--Left Side of the main-->
+        <div class = 'left_side_box'>
+            <section id = "paragraph">
+                <p>Type below the pokemon you want to see the stats for! Hit the submit button to generate the pokemon below</p>
+            </section>
+            <section id = "form">
+                    <input class = "input" type = "text" placeholder = "Choose your Pokemon">
+                    <div class="button"><p>Fetch Pokemon</p></div>
+                    <div class="button2"><p>Random Pokemon</p></div>
+            </section>
+            <section id = "display">
+                <img id = "type_badge" src ="">
+                <img id = "pokemonPicture" src="">
+                <div id = "pokemon_data">
+                    <div id = pokemon_name></div>
+                    <div id = pokemon_type></div>
+                    <div id = pokemon_hp></div>
+                    <div id = pokemon_attack></div>
+                    <div id = pokemon_defense></div>
+                </div>
+            </section>
+        </div>
+        <!--Right side of the main-->
+        <div class = "right_side_box">
+            <!--Scrollable pokemon list capped to 20 mostly in script.js-->
+            <section id = "pokemon_list">
+            </section>
+        </div>
+    </main>
+    <script src="./script.js"></script>
+</body>
+</html>
