@@ -9,7 +9,9 @@ const attack = document.querySelector('#pokemon_attack');
 const defense = document.querySelector('#pokemon_defense');
 const display = document.querySelector('#display');
 const pokemonName = document.querySelector('#pokemonName2');
-const typeBadge = document.querySelector('#type_badge');
+const typeBadge = document.createElement('img')
+typeBadge.classList.add('type_badge');
+display.appendChild(typeBadge);
 
 let offset = 0;
 const limit = 50;
@@ -25,6 +27,8 @@ async function loadPokemon() {
     data.results.forEach(pokemon => {//iterates through the results and does a function to each object.
         displayPokemon(pokemon);
     });
+
+    updateTypeBadge(data);
 
     offset += 50;
 }
@@ -48,10 +52,10 @@ async function displayPokemon(pokemon) {
 
     const name = document.createElement('span');
     name.textContent = pokemon.name;
-    let pokemonHealth = data.stats[0].base_stat;
-    let pokemonAttack = data.stats[1].base_stat;
-    let pokemonDefense = data.stats[2].base_stat;
-    let typeOfPokemon = data.types.map(t => t.type.name);
+    const pokemonHealth = data.stats[0].base_stat;
+    const pokemonAttack = data.stats[1].base_stat;
+    const pokemonDefense = data.stats[2].base_stat;
+    const typeOfPokemon = data.types.map(t => t.type.name);
 
     item.appendChild(img);
     item.appendChild(name);
@@ -66,52 +70,14 @@ async function displayPokemon(pokemon) {
         attack.textContent = `attack: ${pokemonAttack}`;
         defense.textContent = `defense: ${pokemonDefense}`;
 
-        typeFinder(typeOfPokemon)
     })
 }
 
-function typeFinder(pokemonType){
+function updateTypeBadge(pokemon) {
+    console.log(pokemon.types[0]);
+    if(!pokemon || !pokemon.types[0].type.name) console.log('oops');
 
-    if(pokemonType.includes('electric')){
-        typeBadge.src = './media/Electric_icon_HOME3.png';
-    }
-    else if(pokemonType.includes('fire')){
-        typeBadge.src = './media/Fire_icon_HOME3.png';
-    }
-    else if(pokemonType.includes('grass')){
-        typeBadge.src = './media/Grass_icon_HOME3.png';
-    }
-    else if(pokemonType.includes('rock')){
-        typeBadge.src = './media/Rock_icon_HOME3.png';
-    }
-    else if(pokemonType.includes('water')){
-        typeBadge.src = './media/water_type.png';
-    }
-    else if(pokemonType.includes('psychic')){
-        typeBadge.src = './media/Psychic_icon_HOME3.png';
-    }
-    else if(pokemonType.includes('normal')){
-        typeBadge.src = './media/Normal_icon_HOME3.png';
-    }
-    else if(pokemonType.includes('poison')){
-        typeBadge.src = './media/Poison_icon_HOME3.png';
-    }
-    else if(pokemonType.includes('steel')){
-        typeBadge.src = './media/Steel_icon_HOME3.png';
-    }
-    else if(pokemonType.includes('rock')){
-        typeBadge.src = './media/Rock_icon_HOME3.png';
-    }
-    else if(pokemonType.includes('ice')){
-        typeBadge.src = './media/Ice_icon_HOME3.png';
-    }
-    else if(pokemonType.includes('ghost')){
-        typeBadge.src = './media/Ghost_icon_HOME3.png';
-    }
-    else if(pokemonType.includes('flying')){
-        typeBadge.src = './media/Flying_icon_HOME3.png';
-    }
-    
+    typeBadge.src = `./media/${pokemon.types[0].type.name}.png`;
 }
 
 
@@ -120,24 +86,26 @@ function typeFinder(pokemonType){
 
 async function getPokemon(){
     
-    let name = input.value.trim();//sets a variable to the input value of the search bar.
+    const name = input.value.trim();//sets a variable to the input value of the search bar.
 
-    let url = `https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}`;// sets a variable to the api with name being an input by user.
-    let response = await fetch(url);
+    const url = `https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}`;// sets a variable to the api with name being an input by user.
+    const response = await fetch(url);
 
     if(!response.ok){
         input.value = '';
         throw new Error("No Pokemon found"); //checks to see if response comes back successful
     };
 
-    let pokemon = await response.json();//turns response into an object that can be used
+    const pokemon = await response.json();//turns response into an object that can be used
 
-    let pokemonName = pokemon.name;//sets a variable to inside the response called "name"
-    let pokemonPicture = pokemon.sprites.front_default;// sets a variable to inside the response called "sprites" "front_default"
-    let pokemonType = pokemon.types.map(t => t.type.name);//sets a variable to inside the response called "types"
-    let pokemonHealth = pokemon.stats[0].base_stat;
-    let pokemonAttack = pokemon.stats[1].base_stat;
-    let pokemonDefense = pokemon.stats[2].base_stat;//sets a variable to inside the response called "stats[0]" which is health
+    updateTypeBadge(pokemon);
+
+    const pokemonName = pokemon.name;//sets a variable to inside the response called "name"
+    const pokemonPicture = pokemon.sprites.front_default;// sets a variable to inside the response called "sprites" "front_default"
+    const pokemonType = pokemon.types.map(t => t.type.name);//sets a variable to inside the response called "types"
+    const pokemonHealth = pokemon.stats[0].base_stat;
+    const pokemonAttack = pokemon.stats[1].base_stat;
+    const pokemonDefense = pokemon.stats[2].base_stat;//sets a variable to inside the response called "stats[0]" which is health
 
     return {pokemonName, pokemonPicture, pokemonType, pokemonHealth, pokemonAttack, pokemonDefense}
 
@@ -148,19 +116,21 @@ async function getPokemon(){
 
 async function randomPokemon(){
 
-    let random = Math.floor(Math.random() * 1000);
-    let url = `https://pokeapi.co/api/v2/pokemon/${random}`;
+    const random = Math.floor(Math.random() * 1000);
+    const url = `https://pokeapi.co/api/v2/pokemon/${random}`;
 
-    let res = await fetch(url);
+    const res = await fetch(url);
 
-    let pokemon = await res.json();
+    const pokemon = await res.json();
 
-    let pokemonName = pokemon.name;
-    let pokemonPicture = pokemon.sprites.front_default;
-    let pokemonType = pokemon.types[0].type.name;
-    let pokemonHealth = pokemon.stats[0].base_stat;
-    let pokemonAttack = pokemon.stats[1].base_stat;
-    let pokemonDefense = pokemon.stats[2].base_stat;
+    updateTypeBadge(pokemon);
+
+    const pokemonName = pokemon.name;
+    const pokemonPicture = pokemon.sprites.front_default;
+    const pokemonType = pokemon.types[0].type.name;
+    const pokemonHealth = pokemon.stats[0].base_stat;
+    const pokemonAttack = pokemon.stats[1].base_stat;
+    const pokemonDefense = pokemon.stats[2].base_stat;
     return {pokemonName, pokemonPicture, pokemonType, pokemonHealth, pokemonAttack, pokemonDefense};
 
 };
@@ -212,10 +182,6 @@ button2.addEventListener("click", async () => {
     attack.textContent = 'attack: ' + pokemonAttack;
     defense.textContent = 'defense: ' + pokemonDefense;
     input.value = '';
-
-
-
-    typeFinder(pokemonType);
 
     display.classList.add('fade-in');
 

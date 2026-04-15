@@ -185,7 +185,7 @@ main {
 
 }
 
-#type_badge {
+.type_badge {
     width: 2.5rem;
     height: 2.5rem;
     
@@ -206,8 +206,8 @@ main {
     }
 }
 
-@media (max-width: 768px) {
-    
+.hidden {
+    display: none;
 }
 
 
